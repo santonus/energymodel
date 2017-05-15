@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            name="Sample Category"
+            id="PTXAnalysis.commands.category">
+      </category>
+      <command
+            name="Perform Energy Estimation"
+            categoryId="PTXAnalysis.commands.category"
+            id="PTXAnalysis.commands.sampleCommand">
+      </command>
+      <command
+            name="Prepare"
+            categoryId="PTXAnalysis.commands.category"
+            id="PTXAnalysis.commands.Preparation">
+      </command>
+   </extension>
+   
+ 	<extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            commandId="PTXAnalysis.commands.sampleCommand"
+            class="edu.bitsgoa.driver.EnergyEstimator">
+      </handler>
+      <handler
+            commandId="PTXAnalysis.commands.Preparation"
+            class="edu.bitsgoa.driver.Preparation">
+      </handler>
+   </extension>
+      
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
+         <menu
+               label="Energy Estimation"
+               mnemonic="M"
+               id="PTXAnalysis.menus.sampleMenu">
+            <command
+        	   commandId="PTXAnalysis.commands.Preparation"
+               mnemonic="S"
+               id="PTXAnalysis.menus.sampleCommand">
+            </command>
+            <command
+                  commandId="PTXAnalysis.commands.sampleCommand"
+                  mnemonic="S"
+                  id="PTXAnalysis.menus.sampleCommand">
+            </command>            
+         </menu>
+      </menuContribution>
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar
+               id="PTXAnalysis.toolbars.sampleToolbar">
+            <command
+                  commandId="PTXAnalysis.commands.sampleCommand"
+                  icon="icons/GPU.gif"
+                  tooltip="Perform Energy Estimation"
+                  id="PTXAnalysis.toolbars.sampleCommand">
+            </command>
+            
+         </toolbar>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.propertyPages">
+      <page
+            class="edu.bitsgoa.properties.Parameters"
+            id="PTXAnalysis.page2"
+            name="Energy Estimation">
+      </page>
+   </extension>
+   
+   <extension point="org.eclipse.ui.startup">
+   		<startup class="edu.bitsgoa.startup.StartCheck"/>
+	</extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            class="edu.bitsgoa.views.CustomConsole"
+            id="edu.bitsgoa.views.CustomConsole"
+            name="Energy Estimation Results">
+      </view>
+   </extension>   
+   
+   
+  </plugin>

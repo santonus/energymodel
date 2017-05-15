@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: PTXAnalysis
+Bundle-SymbolicName: edu.bitsgoa.EnergyModelling;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Require-Bundle: org.eclipse.ui
+Import-Package: org.eclipse.core.expressions,
+ org.eclipse.core.resources,
+ org.eclipse.core.runtime,
+ org.osgi.framework;version="1.7.0"
+Bundle-ClassPath: .,
+ lib/commons-math3-3.6.1.jar,
+ lib/opencsv-3.9.jar

@@ -1,0 +1,22 @@
+,2,2.1,"3.0,3.2","3.5,3.7","5.0,5.2",5.3,6,6.1,6.2
+"16-bit floating-point add,multiply, multiply-add",n/a,n/a,n/a,n/a,n/a,256,128,2,256
+"32-bit floating-point add, multiply,multiply-add",32,48,192,192,128,128,64,128,128
+"64-bit floating-point add, multiply,multiply-add",16,4,8,64,4,4,32,4,4
+"32-bit floating-point reciprocal, reciprocal sqrt, base-2 log, base-2 expo,sine, cosine",4,8,32,32,32,32,16,32,32
+"32-bit integer add, extended-precision add, subtract, extende-precision subtract",32,48,160,160,128,128,64,128,128
+"32-bit integer multiply, multiply-add, extended-precision multiply-add",16,16,32,32,mi,mi,mi,mi,mi
+24-bit integer multiply,mi,mi,mi,mi,mi,mi,mi,mi,mi
+32-bit integer shift,16,16,32,64,64,64,32,64,64
+"compare minimum, maximum",32,48,160,160,64,64,32,64,64
+"32-bit integer bit reverse, bit field extract/insert",16,16,32,32,64,64,32,64,64
+"32-bit bitwise AND,OR,XOR",32,48,160,160,128,128,64,128,128
+"count of leading zeros, most significant non-sign bit",16,16,32,32,mi,mi,mi,mi,mi
+population count,16,16,32,32,32,32,32,32,32
+warp shuffle,n/a,n/a,32,32,32,32,32,32,32
+sum of absolute difference,16,16,32,32,64,64,32,64,64
+SIMD video instructions vabsdiff2,n/a,n/a,160,160,mi,mi,mi,mi,mi
+SIMD video instructions vabsdiff4,n/a,n/a,160,160,mi,mi,mi,mi,mi
+All other SIMD video instructions,16,16,32,32,mi,mi,mi,mi,mi
+Type conversions from 8-bit and 16-bit integer to 32-bit types,16,16,128,128,32,32,16,32,32
+Type conversions from and to 64-bit types,16,4,8,32,4,4,16,4,4
+All other type conversions,16,16,32,32,32,32,16,32,32
