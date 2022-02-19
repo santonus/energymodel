@@ -1,10 +1,13 @@
 Command to run Jar file : java -jar featureExtraction.jar
 
 Expected Output:
+
 Architecture: (0-K20, 1-K4200, 2- M60, 3- V100):                                                                        
 0                                                                                                                       
+
 Please enter benchmark name (Note: Folder and PTX file should have the same name):                                      
 clock                                                                                                                   
+
 Feature Extraction Algorithm Results                                                                                    
 Number of Computing Instructions (Comp_inst_kernel):37                                                                  
 Average Compute Latency (avg_comp_lat):12.837837837837839                                                               
