@@ -1,4 +1,10 @@
-Command to run Jar file : java -jar featureExtraction.jar
+README for feature extrtaction algorithm used in power prediction 
+
+Steps to use Feature Extraction Algorithm
+Step 1) Generate PTX file for your CUDA application
+Step 2) Create a folder with the benchmark name which should include PTX file with same name.
+Step 3) Create and edit the config file given for sample clock benchmark
+Step 4) Command to run Jar file : java -jar featureExtraction.jar
 
 Expected Output:
 
