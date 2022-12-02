@@ -2,7 +2,7 @@ Readme for Energy Plugin
 
 Download the jar file of plugin from:https://gargi-gpu-energy-prediction.s3.ap-south-1.amazonaws.com/energypredictionplugin.jar
 
-Steps for running GPPT:
+Steps for running Energy Prediction Plugin :
 
     Install jar file in your eclipse IDE
     Copy gppt folder in your .eclipse folder
