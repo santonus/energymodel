@@ -8,5 +8,5 @@ Steps for running GPPT:
     Copy gppt folder in your .eclipse folder
     Also copy the example benchmark in your .eclipse folder
     Open your plugin environment and open the benchmark and its config file in eclipse IDE
-    Click on Energy Prediction Logo https://github.com/santonus/energymodel/blob/master/energyplugin/energy_logo.png or Perform Energy Prediction under Energy Prediction in menu bar to produce the output.
+    Click on Energy Prediction Logo   or Perform Energy Prediction under Energy Prediction in menu bar to produce the output.
 
