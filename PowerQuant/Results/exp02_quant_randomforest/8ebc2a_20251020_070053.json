@@ -1,0 +1,22 @@
+{
+  "metadata": {
+    "experiment_id": "exp02_quant_randomforest",
+    "timestamp": "2025-10-20T07:00:53.205714",
+    "config_hash": "8ebc2a",
+    "test_arch": "adalovelace"
+  },
+  "hyperparameters": {
+    "n_estimators": 712,
+    "max_depth": 9,
+    "max_features": 0.25556541525790566,
+    "min_samples_leaf": 10,
+    "bootstrap": true,
+    "random_state": 42,
+    "verbose": 0
+  },
+  "results": {
+    "rmse": 11.594701871007597,
+    "mae": 8.028655442668844,
+    "r2": 0.34919258406951637
+  }
+}

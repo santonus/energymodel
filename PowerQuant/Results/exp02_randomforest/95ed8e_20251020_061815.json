@@ -1,0 +1,22 @@
+{
+  "metadata": {
+    "experiment_id": "exp02_randomforest",
+    "timestamp": "2025-10-20T06:18:15.682542",
+    "config_hash": "95ed8e",
+    "test_arch": "k80"
+  },
+  "hyperparameters": {
+    "n_estimators": 524,
+    "max_depth": 4,
+    "max_features": 0.37782355711869764,
+    "min_samples_leaf": 8,
+    "bootstrap": true,
+    "random_state": 42,
+    "verbose": 0
+  },
+  "results": {
+    "rmse": 22.738358808124094,
+    "mae": 18.985212751767023,
+    "r2": -0.02645135753675354
+  }
+}

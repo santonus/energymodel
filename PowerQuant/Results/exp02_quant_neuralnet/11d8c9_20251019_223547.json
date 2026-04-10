@@ -1,0 +1,30 @@
+{
+  "metadata": {
+    "experiment_id": "exp02_quant_neuralnet",
+    "timestamp": "2025-10-19T22:35:47.707684",
+    "config_hash": "11d8c9",
+    "test_arch": "tesla"
+  },
+  "hyperparameters": {
+    "hidden_layer_sizes": [
+      8,
+      100,
+      100,
+      1
+    ],
+    "activation": "relu",
+    "optimizer": "sgd",
+    "learning_rate": 0.002981700479832411,
+    "momentum": 0.7643195615799266,
+    "num_epochs": 1000,
+    "batch_size": 256,
+    "loss_function": "bce",
+    "weight_decay": 0.0014610428473538256,
+    "verbose": 100
+  },
+  "results": {
+    "rmse": 53.86443868641951,
+    "mae": 34.43306537404916,
+    "r2": -0.21461140870848538
+  }
+}

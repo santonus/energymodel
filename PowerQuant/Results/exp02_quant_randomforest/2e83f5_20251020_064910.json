@@ -1,0 +1,22 @@
+{
+  "metadata": {
+    "experiment_id": "exp02_quant_randomforest",
+    "timestamp": "2025-10-20T06:49:10.302670",
+    "config_hash": "2e83f5",
+    "test_arch": "tesla"
+  },
+  "hyperparameters": {
+    "n_estimators": 2417,
+    "max_depth": 8,
+    "max_features": 0.11965927274978726,
+    "min_samples_leaf": 1,
+    "bootstrap": false,
+    "random_state": 42,
+    "verbose": 0
+  },
+  "results": {
+    "rmse": 46.31580517792417,
+    "mae": 31.388073778666833,
+    "r2": 0.10196861277633862
+  }
+}

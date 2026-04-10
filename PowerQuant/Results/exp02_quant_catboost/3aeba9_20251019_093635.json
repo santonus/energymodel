@@ -1,0 +1,24 @@
+{
+  "metadata": {
+    "experiment_id": "exp02_quant_catboost",
+    "timestamp": "2025-10-19T09:36:35.692912",
+    "config_hash": "3aeba9",
+    "test_arch": "adalovelace"
+  },
+  "hyperparameters": {
+    "depth": 3,
+    "learning_rate": 0.03223230749931024,
+    "iterations": 2000,
+    "random_state": 42,
+    "verbose": 500,
+    "min_data_in_leaf": 15,
+    "l2_leaf_reg": 4.424128651107502,
+    "loss_function": "RMSE",
+    "eval_metric": "RMSE"
+  },
+  "results": {
+    "rmse": 13.8437273674754,
+    "mae": 9.389477055136917,
+    "r2": 0.07223198461015934
+  }
+}

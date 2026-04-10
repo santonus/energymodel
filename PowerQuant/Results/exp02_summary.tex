@@ -1,0 +1,90 @@
+% --- Out-of-Distribution Tables (2x2 grid) ---
+\begin{table*}[t]
+    \centering
+    \caption{Out-of-distribution results. Each subtable shows performance when testing on a held-out architecture not seen during training. Lower RMSE/MAE and higher $R^2$ are better.}
+    \label{tab:ood-results}
+    \vspace{0.5em}
+    %% Row 1
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \subcaption{Test on Ada Lovelace (train on others)}
+        \label{tab:ood-adalovelace}
+        \begin{tabular}{lccc}
+            \toprule
+            \textbf{Method} & \textbf{RMSE} $\downarrow$ & \textbf{MAE} $\downarrow$ & $\boldsymbol{R^2}$ $\uparrow$ \\
+            \midrule
+            RF      & 58.93 $\pm$ 0.38 & 56.98 $\pm$ 0.39 & -15.81 $\pm$ 0.22 \\
+            RF-Q    & 11.05 $\pm$ 0.06 & 7.06 $\pm$ 0.04 & 0.41 $\pm$ 0.01 \\
+            \midrule
+            CB      & 58.15 $\pm$ 1.06 & 55.25 $\pm$ 1.52 & -15.37 $\pm$ 0.59 \\
+            CB-Q    & 11.97 $\pm$ 0.13 & 7.52 $\pm$ 0.14 & 0.31 $\pm$ 0.01 \\
+            \midrule
+            NN      & 61.98 $\pm$ 3.83 & 55.19 $\pm$ 3.78 & -17.65 $\pm$ 2.26 \\
+            NN-Q    & 10.80 $\pm$ 0.50 & 7.18 $\pm$ 0.28 & 0.43 $\pm$ 0.05 \\
+            \bottomrule
+        \end{tabular}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \subcaption{Test on Kepler (K80) (train on others)}
+        \label{tab:ood-k80}
+        \begin{tabular}{lccc}
+            \toprule
+            \textbf{Method} & \textbf{RMSE} $\downarrow$ & \textbf{MAE} $\downarrow$ & $\boldsymbol{R^2}$ $\uparrow$ \\
+            \midrule
+            RF      & 22.34 $\pm$ 0.13 & 18.73 $\pm$ 0.20 & 0.01 $\pm$ 0.01 \\
+            RF-Q    & 18.95 $\pm$ 0.11 & 16.08 $\pm$ 0.07 & 0.29 $\pm$ 0.01 \\
+            \midrule
+            CB      & 22.81 $\pm$ 2.97 & 17.76 $\pm$ 2.11 & -0.05 $\pm$ 0.27 \\
+            CB-Q    & 18.12 $\pm$ 0.39 & 15.18 $\pm$ 0.28 & 0.35 $\pm$ 0.03 \\
+            \midrule
+            NN      & 312.48 $\pm$ 30.30 & 230.08 $\pm$ 28.70 & -194.31 $\pm$ 39.59 \\
+            NN-Q    & 30.47 $\pm$ 2.04 & 24.61 $\pm$ 1.47 & -0.85 $\pm$ 0.25 \\
+            \bottomrule
+        \end{tabular}
+    \end{minipage}
+
+    \vspace{1em}
+
+    %% Row 2
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \subcaption{Test on Ampere (train on others)}
+        \label{tab:ood-ampere}
+        \begin{tabular}{lccc}
+            \toprule
+            \textbf{Method} & \textbf{RMSE} $\downarrow$ & \textbf{MAE} $\downarrow$ & $\boldsymbol{R^2}$ $\uparrow$ \\
+            \midrule
+            RF      & 29.91 $\pm$ 0.89 & 26.17 $\pm$ 0.43 & -0.09 $\pm$ 0.07 \\
+            RF-Q    & 23.96 $\pm$ 0.23 & 16.59 $\pm$ 0.16 & 0.30 $\pm$ 0.01 \\
+            \midrule
+            CB      & 28.06 $\pm$ 0.18 & 20.78 $\pm$ 0.82 & 0.05 $\pm$ 0.01 \\
+            CB-Q    & 21.55 $\pm$ 0.27 & 15.17 $\pm$ 0.17 & 0.44 $\pm$ 0.01 \\
+            \midrule
+            NN      & 42.63 $\pm$ 1.39 & 33.00 $\pm$ 1.61 & -1.21 $\pm$ 0.15 \\
+            NN-Q    & 22.14 $\pm$ 1.21 & 15.71 $\pm$ 0.61 & 0.40 $\pm$ 0.06 \\
+            \bottomrule
+        \end{tabular}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \subcaption{Test on Tesla (train on others)}
+        \label{tab:ood-tesla}
+        \begin{tabular}{lccc}
+            \toprule
+            \textbf{Method} & \textbf{RMSE} $\downarrow$ & \textbf{MAE} $\downarrow$ & $\boldsymbol{R^2}$ $\uparrow$ \\
+            \midrule
+            RF      & 68.52 $\pm$ 0.03 & 49.46 $\pm$ 0.03 & -0.97 $\pm$ 0.00 \\
+            RF-Q    & 44.12 $\pm$ 0.14 & 29.57 $\pm$ 0.10 & 0.18 $\pm$ 0.01 \\
+            \midrule
+            CB      & 70.76 $\pm$ 1.66 & 54.14 $\pm$ 3.28 & -1.10 $\pm$ 0.10 \\
+            CB-Q    & 43.58 $\pm$ 0.35 & 26.98 $\pm$ 0.43 & 0.20 $\pm$ 0.01 \\
+            \midrule
+            NN      & 91.94 $\pm$ 13.22 & 72.10 $\pm$ 13.42 & -2.60 $\pm$ 0.92 \\
+            NN-Q    & 48.61 $\pm$ 1.49 & 31.48 $\pm$ 1.37 & 0.01 $\pm$ 0.06 \\
+            \bottomrule
+        \end{tabular}
+    \end{minipage}
+\end{table*}

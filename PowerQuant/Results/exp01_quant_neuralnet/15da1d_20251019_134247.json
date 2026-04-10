@@ -1,0 +1,28 @@
+{
+  "metadata": {
+    "experiment_id": "exp01_quant_neuralnet",
+    "timestamp": "2025-10-19T13:42:47.510661",
+    "config_hash": "15da1d"
+  },
+  "hyperparameters": {
+    "hidden_layer_sizes": [
+      8,
+      100,
+      1
+    ],
+    "activation": "relu",
+    "optimizer": "adam",
+    "learning_rate": 0.011201547914318129,
+    "momentum": 0.7076391598528492,
+    "num_epochs": 1000,
+    "batch_size": 256,
+    "loss_function": "mse",
+    "weight_decay": 0.006773533454222148,
+    "verbose": 100
+  },
+  "results": {
+    "rmse": 25.225124714579287,
+    "mae": 16.43902299405845,
+    "r2": 0.6456519173250053
+  }
+}

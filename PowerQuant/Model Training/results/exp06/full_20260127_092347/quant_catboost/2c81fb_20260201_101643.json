@@ -1,0 +1,24 @@
+{
+  "metadata": {
+    "experiment_id": "exp06_quant_catboost",
+    "dataset_name": "full_20260127_092347",
+    "timestamp": "2026-02-01T10:16:43.348106",
+    "config_hash": "2c81fb"
+  },
+  "hyperparameters": {
+    "depth": 8,
+    "learning_rate": 0.03274258773973271,
+    "iterations": 5000,
+    "random_state": 42,
+    "verbose": 500,
+    "min_data_in_leaf": 30,
+    "l2_leaf_reg": 0.4182708188485027,
+    "loss_function": "LoglossObjective",
+    "eval_metric": "RMSE"
+  },
+  "results": {
+    "rmse": 32.33783406512484,
+    "mae": 19.395229058775232,
+    "r2": 0.8555114393070611
+  }
+}

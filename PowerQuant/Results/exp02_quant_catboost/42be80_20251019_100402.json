@@ -1,0 +1,24 @@
+{
+  "metadata": {
+    "experiment_id": "exp02_quant_catboost",
+    "timestamp": "2025-10-19T10:04:02.187072",
+    "config_hash": "42be80",
+    "test_arch": "tesla"
+  },
+  "hyperparameters": {
+    "depth": 1,
+    "learning_rate": 0.09740519782027329,
+    "iterations": 2000,
+    "random_state": 42,
+    "verbose": 500,
+    "min_data_in_leaf": 17,
+    "l2_leaf_reg": 6.688915058005586,
+    "loss_function": "LoglossObjective",
+    "eval_metric": "RMSE"
+  },
+  "results": {
+    "rmse": 46.65070112693836,
+    "mae": 28.868057052641507,
+    "r2": 0.08893485985873739
+  }
+}

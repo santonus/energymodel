@@ -1,0 +1,20 @@
+% --- In-Distribution Table ---
+\begin{table}[t]
+    \centering
+    \caption{In-distribution results. Models trained and tested on the same architectures. Lower RMSE/MAE and higher $R^2$ are better.}
+    \label{tab:id-results}
+    \begin{tabular}{lccc}
+        \toprule
+        \textbf{Method} & \textbf{RMSE} $\downarrow$ & \textbf{MAE} $\downarrow$ & $\boldsymbol{R^2}$ $\uparrow$ \\
+        \midrule
+        RF      & 75.14 $\pm$ 0.25 & 57.82 $\pm$ 0.39 & -0.00 $\pm$ 0.01 \\
+        RF-Q    & 29.16 $\pm$ 1.21 & 19.92 $\pm$ 1.06 & 0.85 $\pm$ 0.01 \\
+        \midrule
+        CB      & 14.56 $\pm$ 1.52 & 7.94 $\pm$ 1.19 & 0.88 $\pm$ 0.03 \\
+        CB-Q    & 27.92 $\pm$ 0.24 & 18.78 $\pm$ 0.23 & 0.86 $\pm$ 0.00 \\
+        \midrule
+        NN      & 74.58 $\pm$ 0.15 & 57.99 $\pm$ 0.16 & 0.01 $\pm$ 0.00 \\
+        NN-Q    & 32.50 $\pm$ 1.13 & 22.74 $\pm$ 1.10 & 0.81 $\pm$ 0.01 \\
+        \bottomrule
+    \end{tabular}
+\end{table}

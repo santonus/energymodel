@@ -1,0 +1,34 @@
+[project]
+name = "quant-powerpred"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "catboost>=1.2.8",
+    "dotenv>=0.9.9",
+    "jupyter>=1.1.1",
+    "numpy>=2.2.6",
+    "optuna>=4.5.0",
+    "pydantic>=2.12.2",
+    "rich>=14.2.0",
+    "scikit-learn>=1.7.2",
+    "scipy>=1.15.3",
+    "seaborn>=0.13.2",
+    "torch>=2.8.0",
+    "torchvision>=0.23.0",
+    "tqdm>=4.67.1",
+    "xgboost>=3.0.5",
+]
+
+[tool.ruff]
+line-length = 100
+src = ["src", "experiments"]
+
+[tool.ruff.format]
+quote-style = "single"
+indent-style = "space"
+docstring-code-format = true
+
+[tool.ruff.lint.isort]
+known-first-party = ["src"]

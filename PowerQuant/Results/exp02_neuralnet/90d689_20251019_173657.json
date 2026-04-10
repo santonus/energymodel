@@ -1,0 +1,30 @@
+{
+  "metadata": {
+    "experiment_id": "exp02_neuralnet",
+    "timestamp": "2025-10-19T17:36:57.083279",
+    "config_hash": "90d689",
+    "test_arch": "k80"
+  },
+  "hyperparameters": {
+    "hidden_layer_sizes": [
+      8,
+      100,
+      100,
+      1
+    ],
+    "activation": "relu",
+    "optimizer": "adam",
+    "learning_rate": 0.016686584920731867,
+    "momentum": 0.7201018664048972,
+    "num_epochs": 2000,
+    "batch_size": 512,
+    "loss_function": "mse",
+    "weight_decay": 0.00046989551840615965,
+    "verbose": 100
+  },
+  "results": {
+    "rmse": 227.76593955122942,
+    "mae": 181.44069137593402,
+    "r2": -101.99062696435972
+  }
+}

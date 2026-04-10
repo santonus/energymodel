@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerQuant - Model Power Analysis</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/monokai.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            height: calc(100vh - 200px);
+        }
+
+        .editor-panel, .results-panel {
+            padding: 30px;
+            overflow-y: auto;
+        }
+
+        .editor-panel {
+            border-right: 2px solid #e0e0e0;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .panel-header h2 {
+            color: #333;
+            font-size: 1.5em;
+        }
+
+        .template-selector {
+            padding: 8px 12px;
+            border: 2px solid #667eea;
+            border-radius: 6px;
+            background: white;
+            color: #667eea;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .template-selector:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .CodeMirror {
+            height: calc(100% - 140px) !important;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-analyze {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-analyze:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-validate {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-validate:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+
+        .btn-clear {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-clear:hover {
+            background: #c82333;
+            transform: translateY(-2px);
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .results-container {
+            display: none;
+        }
+
+        .results-container.active {
+            display: block;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #667eea;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .section {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .section h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .feature-item {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #667eea;
+        }
+
+        .feature-label {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+
+        .feature-value {
+            color: #333;
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+
+        .prediction-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 2px solid #e0e0e0;
+        }
+
+        .prediction-card h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .prediction-values {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .prediction-value {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+
+        .prediction-value-label {
+            color: #666;
+            font-size: 0.85em;
+            margin-bottom: 5px;
+        }
+
+        .prediction-value-number {
+            color: #333;
+            font-size: 1.3em;
+            font-weight: 700;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #f5c6cb;
+            margin-bottom: 20px;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #c3e6cb;
+            margin-bottom: 20px;
+        }
+
+        .info-box {
+            background: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        .info-box strong {
+            color: #004085;
+        }
+
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+
+            .editor-panel {
+                border-right: none;
+                border-bottom: 2px solid #e0e0e0;
+            }
+
+            .CodeMirror {
+                height: 400px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⚡ PowerQuant</h1>
+            <p>Analyze PyTorch models and predict power consumption</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Editor Panel -->
+            <div class="editor-panel">
+                <div class="panel-header">
+                    <h2>📝 Model Code</h2>
+                    <select class="template-selector" id="templateSelector">
+                        <option value="">Load Template...</option>
+                    </select>
+                </div>
+                
+                <textarea id="codeEditor"></textarea>
+                
+                <div class="button-group">
+                    <button class="btn-validate" onclick="validateCode()">✓ Validate</button>
+                    <button class="btn-analyze" onclick="analyzeModel()">🔍 Analyze & Predict</button>
+                    <button class="btn-clear" onclick="clearResults()">✕ Clear</button>
+                </div>
+
+                <div class="info-box">
+                    <strong>Template Structure:</strong><br>
+                    • Define your Model class with __init__ and forward methods<br>
+                    • Set global variables (batch_size, dimensions, etc.)<br>
+                    • Implement get_inputs() to return sample input tensors<br>
+                    • Implement get_init_inputs() to return model initialization parameters
+                </div>
+            </div>
+
+            <!-- Results Panel -->
+            <div class="results-panel">
+                <div class="panel-header">
+                    <h2>📊 Analysis Results</h2>
+                </div>
+
+                <div id="loadingIndicator" class="loading" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Analyzing model...</p>
+                </div>
+
+                <div id="resultsContainer" class="results-container">
+                    <div id="featuresSection" class="section">
+                        <h3>Model Features</h3>
+                        <div class="feature-grid" id="featureGrid"></div>
+                    </div>
+
+                    <div id="predictionsSection" class="section">
+                        <h3>Power Consumption Predictions (Watts)</h3>
+                        <div id="predictionsContainer"></div>
+                    </div>
+                </div>
+
+                <div id="messageContainer"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+    <script>
+        // Initialize CodeMirror
+        const editor = CodeMirror.fromTextArea(document.getElementById('codeEditor'), {
+            mode: 'python',
+            theme: 'monokai',
+            lineNumbers: true,
+            indentUnit: 4,
+            indentWithTabs: false,
+            lineWrapping: true,
+            matchBrackets: true,
+            autoCloseBrackets: true,
+        });
+
+        // Load templates on page load
+        async function loadTemplates() {
+            try {
+                const response = await fetch('/api/templates');
+                const templates = await response.json();
+                
+                const selector = document.getElementById('templateSelector');
+                Object.entries(templates).forEach(([key, template]) => {
+                    const option = document.createElement('option');
+                    option.value = key;
+                    option.textContent = template.name;
+                    selector.appendChild(option);
+                });
+
+                // Load default template
+                if (templates.conv_relu) {
+                    editor.setValue(templates.conv_relu.code);
+                }
+            } catch (error) {
+                console.error('Error loading templates:', error);
+            }
+        }
+
+        // Template selector change handler
+        document.getElementById('templateSelector').addEventListener('change', async function() {
+            if (!this.value) return;
+            
+            try {
+                const response = await fetch('/api/templates');
+                const templates = await response.json();
+                const template = templates[this.value];
+                if (template) {
+                    editor.setValue(template.code);
+                }
+            } catch (error) {
+                showError('Error loading template: ' + error.message);
+            }
+        });
+
+        // Validate code
+        async function validateCode() {
+            const code = editor.getValue();
+            if (!code.trim()) {
+                showError('Please enter some code first');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/validate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ code })
+                });
+
+                const result = await response.json();
+                
+                if (result.valid) {
+                    showSuccess('✓ Code syntax is valid!');
+                } else {
+                    showError(`Syntax error at line ${result.line}: ${result.error}`);
+                }
+            } catch (error) {
+                showError('Validation failed: ' + error.message);
+            }
+        }
+
+        // Analyze model and predict power
+        async function analyzeModel() {
+            const code = editor.getValue();
+            if (!code.trim()) {
+                showError('Please enter some code first');
+                return;
+            }
+
+            // Show loading
+            document.getElementById('loadingIndicator').style.display = 'block';
+            document.getElementById('resultsContainer').classList.remove('active');
+            document.getElementById('messageContainer').innerHTML = '';
+
+            try {
+                // Step 1: Analyze model features
+                const analyzeResponse = await fetch('/api/analyze', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ code })
+                });
+
+                const analyzeResult = await analyzeResponse.json();
+                
+                if (!analyzeResult.success) {
+                    throw new Error(analyzeResult.error || 'Analysis failed');
+                }
+
+                // Display features
+                displayFeatures(analyzeResult.features);
+
+                // Step 2: Predict power consumption
+                const predictResponse = await fetch('/api/predict', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ features: analyzeResult.features })
+                });
+
+                const predictResult = await predictResponse.json();
+                
+                if (!predictResult.success) {
+                    throw new Error(predictResult.error || 'Prediction failed');
+                }
+
+                // Display predictions
+                displayPredictions(predictResult.predictions);
+
+                // Show results
+                document.getElementById('resultsContainer').classList.add('active');
+                
+                if (predictResult.note) {
+                    showInfo(predictResult.note);
+                }
+
+            } catch (error) {
+                showError('Analysis failed: ' + error.message);
+            } finally {
+                document.getElementById('loadingIndicator').style.display = 'none';
+            }
+        }
+
+        // Display model features
+        function displayFeatures(features) {
+            const grid = document.getElementById('featureGrid');
+            grid.innerHTML = '';
+
+            const featureLabels = {
+                'total_bytes_read_mb': 'Memory Read (MB)',
+                'total_bytes_written_mb': 'Memory Write (MB)',
+                'total_bytes_mb': 'Total Memory (MB)',
+                'total_flops_m': 'FLOPs (M)',
+                'arithmetic_intensity': 'Arithmetic Intensity',
+                'num_nodes': 'Graph Nodes',
+                'count_unique_ops': 'Unique Operations'
+            };
+
+            Object.entries(featureLabels).forEach(([key, label]) => {
+                const value = features[key];
+                if (value !== undefined) {
+                    const item = document.createElement('div');
+                    item.className = 'feature-item';
+                    item.innerHTML = `
+                        <div class="feature-label">${label}</div>
+                        <div class="feature-value">${formatNumber(value)}</div>
+                    `;
+                    grid.appendChild(item);
+                }
+            });
+        }
+
+        // Display power predictions
+        function displayPredictions(predictions) {
+            const container = document.getElementById('predictionsContainer');
+            container.innerHTML = '';
+
+            const modelNames = {
+                'catboost': 'CatBoost',
+                'neuralnet': 'Neural Network',
+                'randomforest': 'Random Forest',
+                'svr': 'Support Vector Regressor'
+            };
+
+            Object.entries(predictions).forEach(([model, values]) => {
+                const card = document.createElement('div');
+                card.className = 'prediction-card';
+                card.innerHTML = `
+                    <h4>${modelNames[model]}</h4>
+                    <div class="prediction-values">
+                        <div class="prediction-value">
+                            <div class="prediction-value-label">Lower Bound</div>
+                            <div class="prediction-value-number">${values.lower.toFixed(2)}W</div>
+                        </div>
+                        <div class="prediction-value">
+                            <div class="prediction-value-label">Median</div>
+                            <div class="prediction-value-number">${values.median.toFixed(2)}W</div>
+                        </div>
+                        <div class="prediction-value">
+                            <div class="prediction-value-label">Upper Bound</div>
+                            <div class="prediction-value-number">${values.upper.toFixed(2)}W</div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Utility functions
+        function formatNumber(value) {
+            if (typeof value === 'number') {
+                return value.toFixed(2);
+            }
+            return value;
+        }
+
+        function showError(message) {
+            const container = document.getElementById('messageContainer');
+            container.innerHTML = `<div class="error-message">${message}</div>`;
+            setTimeout(() => container.innerHTML = '', 5000);
+        }
+
+        function showSuccess(message) {
+            const container = document.getElementById('messageContainer');
+            container.innerHTML = `<div class="success-message">${message}</div>`;
+            setTimeout(() => container.innerHTML = '', 3000);
+        }
+
+        function showInfo(message) {
+            const container = document.getElementById('messageContainer');
+            container.innerHTML += `<div class="info-box">${message}</div>`;
+        }
+
+        function clearResults() {
+            document.getElementById('resultsContainer').classList.remove('active');
+            document.getElementById('messageContainer').innerHTML = '';
+        }
+
+        // Initialize
+        loadTemplates();
+    </script>
+</body>
+</html>
